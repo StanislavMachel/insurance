@@ -27,15 +27,7 @@ public class VehicleCalcResult extends Vehicle {
         return monthlyFee;
     }
 
-    public void setMonthlyFee(double monthlyFee) {
-        this.monthlyFee = monthlyFee;
-    }
-
     public double getAnnualFee() {
         return annualFee;
-    }
-
-    public void setAnnualFee(double annualFee) {
-        this.annualFee = annualFee;
     }
 }

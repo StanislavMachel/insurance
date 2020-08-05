@@ -27,47 +27,23 @@ public class Vehicle {
         return plateNumber;
     }
 
-    public void setPlateNumber(String plateNumber) {
-        this.plateNumber = plateNumber;
-    }
-
     public int getFirstRegistration() {
         return firstRegistration;
-    }
-
-    public void setFirstRegistration(int firstRegistration) {
-        this.firstRegistration = firstRegistration;
     }
 
     public double getPurchasePrice() {
         return purchasePrice;
     }
 
-    public void setPurchasePrice(double purchasePrice) {
-        this.purchasePrice = purchasePrice;
-    }
-
     public String getProducer() {
         return producer;
-    }
-
-    public void setProducer(String producer) {
-        this.producer = producer;
     }
 
     public double getMileage() {
         return mileage;
     }
 
-    public void setMileage(double mileage) {
-        this.mileage = mileage;
-    }
-
     public double getPreviousIndemnity() {
         return previousIndemnity;
-    }
-
-    public void setPreviousIndemnity(double previousIndemnity) {
-        this.previousIndemnity = previousIndemnity;
     }
 }
