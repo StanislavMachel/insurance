@@ -43,7 +43,6 @@ public class InsuranceServiceImplTest {
     @Test
     public void getCalculationResult() {
 
-
         String firstVehiclePlateNumber = "AAA000";
         int firstVehicleRegistration = 2019;
         double firstVehiclePurchasePrice = 60000;
