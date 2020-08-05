@@ -1,11 +1,14 @@
 package com.example.insurance.repositories;
 
-import java.io.IOException;
-
 public interface CoefficientRepository {
-    double getRiskByCarProducer(String carProducer) throws IOException;
 
-    double getRiskByParameter(String parameter) throws IOException;
+    String VEHICLE_VALUE_RISK_COEFF = "vehicle_value";
+    String VEHICLE_AGE_RISK_COEFF = "vehicle_age";
+    String VEHICLE_PREVIOUS_INDEMNITY_RISK_COEFF = "previous_indemnity";
 
-    Double getAvgPurchasePriceByCarProducer(String carProducer) throws IOException;
+    double getRiskByCarProducer(String carProducer);
+
+    double getRiskByParameter(String parameter);
+
+    Double getAvgPurchasePriceByCarProducer(String carProducer);
 }

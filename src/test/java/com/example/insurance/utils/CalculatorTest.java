@@ -1,7 +1,9 @@
 package com.example.insurance.utils;
 
-import org.junit.Assert;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculatorTest {
 
@@ -9,12 +11,13 @@ public class CalculatorTest {
     public void calculateAnnualFee() {
         double result = Calculator.calculateAnnualFee(0.99, 49687, 0.08, 5, 1.1);
         //0.99 * (49687 * 0.08 + 1.1 * 5) = 0.99 * (3974.96 + 5.5) = 3940.6554
-        Assert.assertEquals(3940.6554, result, 0.0001);
+        assertEquals(3940.6554, result, 0.0001);
     }
 
     @Test
     public void calculateMonthlyFee() {
         double result = Calculator.calculateMonthlyFee(0.99, 49687, 0.08, 5, 1.1);
-        Assert.assertEquals(328.38795, result, 0.0001);
+        //(0.99 * (49687 * 0.08 + 1.1 * 5) = 0.99 * (3974.96 + 5.5))/12 = 3940.6554 / 12 = 328.38795
+        assertEquals(328.38795, result, 0.0001);
     }
 }
