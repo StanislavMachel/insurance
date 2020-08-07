@@ -11,8 +11,7 @@ public class VehicleCalcResult extends Vehicle {
                              String producer,
                              double mileage,
                              double previousIndemnity,
-                             double annualFee,
-                             double monthlyFee) {
+                             double annualFee) {
         super(plateNumber,
                 firstRegistration,
                 purchasePrice,
@@ -20,11 +19,10 @@ public class VehicleCalcResult extends Vehicle {
                 mileage,
                 previousIndemnity);
         this.annualFee = annualFee;
-        this.monthlyFee = monthlyFee;
     }
 
     public double getMonthlyFee() {
-        return monthlyFee;
+        return this.annualFee / 12;
     }
 
     public double getAnnualFee() {
