@@ -1,4 +1,4 @@
-package com.example.insurance.repositories;
+package com.example.insurance.repositories.json;
 
 public interface CoefficientRepository {
 

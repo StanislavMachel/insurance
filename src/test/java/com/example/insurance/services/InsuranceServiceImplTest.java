@@ -1,8 +1,8 @@
 package com.example.insurance.services;
 
+import com.example.insurance.csv.VehicleCalcResult;
 import com.example.insurance.model.Vehicle;
-import com.example.insurance.model.VehicleCalcResult;
-import com.example.insurance.repositories.VehicleRepository;
+import com.example.insurance.repositories.csv.VehicleCsvRepository;
 import com.example.insurance.services.calculation.strategy.CalculationStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,19 +19,20 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class InsuranceServiceImplTest {
 
+    private static final long TEST_VEHICLE_ID = 1;
     private static final String TEST_VEHICLE_PLATE_NUMBER = "AAA000";
     private static final int TEST_VEHICLE_REGISTRATION = 2019;
     private static final double TEST_VEHICLE_PURCHASE_PRICE = 60000;
     private static final String TEST_VEHICLE_PRODUCER = "BMW";
     private static final double TEST_VEHICLE_MILEAGE = 1000;
     private static final double TEST_VEHICLE_PREVIOUS_INDEMNITY = 5000;
-    private static final Vehicle TEST_VEHICLE = new Vehicle(TEST_VEHICLE_PLATE_NUMBER, TEST_VEHICLE_REGISTRATION, TEST_VEHICLE_PURCHASE_PRICE, TEST_VEHICLE_PRODUCER, TEST_VEHICLE_MILEAGE, TEST_VEHICLE_PREVIOUS_INDEMNITY);
+    private static final Vehicle TEST_VEHICLE = new Vehicle(TEST_VEHICLE_ID, TEST_VEHICLE_PLATE_NUMBER, TEST_VEHICLE_REGISTRATION, TEST_VEHICLE_PURCHASE_PRICE, TEST_VEHICLE_PRODUCER, TEST_VEHICLE_MILEAGE, TEST_VEHICLE_PREVIOUS_INDEMNITY);
 
     @InjectMocks
     private InsuranceServiceImpl insuranceService;
 
     @Mock
-    private VehicleRepository vehicleRepositoryMock;
+    private VehicleCsvRepository vehicleCsvRepositoryMock;
 
     @Mock
     private CalculationStrategy calculationStrategy;
@@ -41,15 +42,18 @@ public class InsuranceServiceImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        Mockito.when(vehicleRepositoryMock.findAll())
+        insuranceService.setCalculationStrategy(calculationStrategy);
+
+        Mockito.when(vehicleCsvRepositoryMock.findAll())
                 .thenReturn(Arrays.asList(
                         TEST_VEHICLE,
-                        new Vehicle("AAA001", 2010, 60000, "VOLVO", 20000, 10000)
+                        new Vehicle(TEST_VEHICLE_ID, "AAA001", 2010, 60000, "VOLVO", 20000, 10000)
                 ));
 
         Mockito.when(calculationStrategy.getVehicleCalcResult(TEST_VEHICLE))
                 .thenReturn(
-                        new VehicleCalcResult(TEST_VEHICLE_PLATE_NUMBER,
+                        new VehicleCalcResult(TEST_VEHICLE_ID,
+                                TEST_VEHICLE_PLATE_NUMBER,
                                 TEST_VEHICLE_REGISTRATION,
                                 TEST_VEHICLE_PURCHASE_PRICE,
                                 TEST_VEHICLE_PRODUCER,
@@ -60,6 +64,7 @@ public class InsuranceServiceImplTest {
 
     @Test
     public void getCalculationResults() {
+
         List<VehicleCalcResult> results = insuranceService.getCalculationResults();
 
         Mockito.verify(calculationStrategy, Mockito.times(2)).getVehicleCalcResult(Mockito.any());

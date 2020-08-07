@@ -1,27 +1,28 @@
 package com.example.insurance.services;
 
-import com.example.insurance.model.VehicleCalcResult;
-import com.example.insurance.repositories.VehicleRepository;
+import com.example.insurance.csv.VehicleCalcResult;
+import com.example.insurance.repositories.csv.VehicleCsvRepository;
 import com.example.insurance.services.calculation.strategy.CalculationStrategy;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class InsuranceServiceImpl implements InsuranceService {
 
-    private final VehicleRepository vehicleRepository;
+    private final VehicleCsvRepository vehicleCsvRepository;
     private CalculationStrategy calculationStrategy;
 
-    public InsuranceServiceImpl(VehicleRepository vehicleRepository, CalculationStrategy calculationStrategy) {
-        this.vehicleRepository = vehicleRepository;
-        this.calculationStrategy = calculationStrategy;
+    public InsuranceServiceImpl(VehicleCsvRepository vehicleCsvRepository) {
+        this.vehicleCsvRepository = vehicleCsvRepository;
     }
 
     @Override
     public List<VehicleCalcResult> getCalculationResults() {
         ArrayList<VehicleCalcResult> results = new ArrayList<>();
 
-        vehicleRepository.findAll().forEach(vehicle -> {
+        vehicleCsvRepository.findAll().forEach(vehicle -> {
 
             VehicleCalcResult result = calculationStrategy.getVehicleCalcResult(vehicle);
 

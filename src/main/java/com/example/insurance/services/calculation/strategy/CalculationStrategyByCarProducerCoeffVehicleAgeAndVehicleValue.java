@@ -1,9 +1,11 @@
 package com.example.insurance.services.calculation.strategy;
 
 import com.example.insurance.model.Vehicle;
-import com.example.insurance.repositories.CoefficientRepository;
+import com.example.insurance.repositories.json.CoefficientRepository;
 import com.example.insurance.utils.Calculator;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue extends CalculationStrategyBase implements CalculationStrategy {
 
     public CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue(CoefficientRepository coefficientRepository) {

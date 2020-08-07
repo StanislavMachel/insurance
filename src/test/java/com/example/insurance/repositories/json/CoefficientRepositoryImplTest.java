@@ -1,4 +1,4 @@
-package com.example.insurance.repositories;
+package com.example.insurance.repositories.json;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
