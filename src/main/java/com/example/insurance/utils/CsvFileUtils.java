@@ -1,17 +1,18 @@
 package com.example.insurance.utils;
 
-import com.example.insurance.model.VehicleCalcResult;
+import com.example.insurance.csv.VehicleCalcResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class CsvFileUtils {
 
-    private static final Logger LOG = Logger.getLogger(CsvFileUtils.class.getName());
+
+    private static Logger LOG = LoggerFactory.getLogger(CsvFileUtils.class);
 
     public static void writeFile(List<VehicleCalcResult> results, String destination) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(destination))) {
@@ -23,8 +24,9 @@ public class CsvFileUtils {
                 writer.write(getCsvFileResultRow(result));
                 writer.newLine();
             }
+            LOG.info("Result wrote to: {}", destination);
         } catch (IOException e) {
-            LOG.log(Level.SEVERE, e.getMessage());
+            LOG.warn(e.getMessage());
         }
     }
 

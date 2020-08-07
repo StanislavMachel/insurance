@@ -1,18 +1,21 @@
-package com.example.insurance.model;
+package com.example.insurance.csv;
+
+import com.example.insurance.model.Vehicle;
 
 public class VehicleCalcResult extends Vehicle {
 
     private double annualFee;
-    private double monthlyFee;
 
-    public VehicleCalcResult(String plateNumber,
+    public VehicleCalcResult(Long id,
+                             String plateNumber,
                              int firstRegistration,
                              double purchasePrice,
                              String producer,
                              double mileage,
                              double previousIndemnity,
                              double annualFee) {
-        super(plateNumber,
+        super(id,
+                plateNumber,
                 firstRegistration,
                 purchasePrice,
                 producer,

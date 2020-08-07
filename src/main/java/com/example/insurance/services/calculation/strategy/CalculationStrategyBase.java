@@ -1,8 +1,8 @@
 package com.example.insurance.services.calculation.strategy;
 
+import com.example.insurance.csv.VehicleCalcResult;
 import com.example.insurance.model.Vehicle;
-import com.example.insurance.model.VehicleCalcResult;
-import com.example.insurance.repositories.CoefficientRepository;
+import com.example.insurance.repositories.json.CoefficientRepository;
 import com.example.insurance.utils.ParamValueCoefficient;
 
 import java.time.LocalDate;
@@ -37,6 +37,7 @@ public abstract class CalculationStrategyBase implements CalculationStrategy {
         if (coefficientRepository.getAvgPurchasePriceByCarProducer(vehicle.getProducer()) == null) return null;
 
         return new VehicleCalcResult(
+                vehicle.getId(),
                 vehicle.getPlateNumber(),
                 vehicle.getFirstRegistration(),
                 vehicle.getPurchasePrice(),

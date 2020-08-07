@@ -1,4 +1,4 @@
-package com.example.insurance.repositories;
+package com.example.insurance.repositories.csv;
 
 import com.example.insurance.model.Vehicle;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,18 +8,18 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class VehicleRepositoryImplTest {
+public class VehicleCsvRepositoryImplTest {
 
-    private VehicleRepository vehicleRepository;
+    private VehicleCsvRepository vehicleCsvRepository;
 
     @BeforeEach
     public void setUp() {
-        vehicleRepository = new VehicleRepositoryImpl();
+        vehicleCsvRepository = new VehicleCsvRepositoryImpl();
     }
 
     @Test
     public void testFindAll() {
-        List<Vehicle> vehicles = vehicleRepository.findAll();
+        List<Vehicle> vehicles = vehicleCsvRepository.findAll();
 
         assertNotNull(vehicles);
         assertFalse(vehicles.isEmpty());
@@ -28,6 +28,7 @@ public class VehicleRepositoryImplTest {
 
         Vehicle firstVehicle = vehicles.get(0);
         assertNotNull(firstVehicle);
+        assertEquals(1, firstVehicle.getId());
         assertEquals("258XCC", firstVehicle.getPlateNumber());
         assertEquals(2013, firstVehicle.getFirstRegistration());
         assertEquals("FORD", firstVehicle.getProducer());
