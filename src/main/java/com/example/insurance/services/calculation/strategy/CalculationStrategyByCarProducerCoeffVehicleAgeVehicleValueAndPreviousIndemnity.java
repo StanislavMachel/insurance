@@ -1,4 +1,4 @@
-package com.example.insurance.services;
+package com.example.insurance.services.calculation.strategy;
 
 import com.example.insurance.model.Vehicle;
 import com.example.insurance.repositories.CoefficientRepository;
@@ -6,7 +6,7 @@ import com.example.insurance.utils.Calculator;
 
 public class CalculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity extends CalculationStrategyBase implements CalculationStrategy {
 
-    private CalculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity(CoefficientRepository coefficientRepository) {
+    public CalculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity(CoefficientRepository coefficientRepository) {
         super(coefficientRepository);
     }
 

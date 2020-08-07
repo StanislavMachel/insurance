@@ -2,6 +2,7 @@ package com.example.insurance.services;
 
 import com.example.insurance.model.VehicleCalcResult;
 import com.example.insurance.repositories.VehicleRepository;
+import com.example.insurance.services.calculation.strategy.CalculationStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

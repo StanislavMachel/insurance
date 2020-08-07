@@ -1,4 +1,4 @@
-package com.example.insurance.services;
+package com.example.insurance.services.calculation.strategy;
 
 import com.example.insurance.model.Vehicle;
 import com.example.insurance.model.VehicleCalcResult;
@@ -7,12 +7,13 @@ import org.mockito.InjectMocks;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-class CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValueTest extends CalculationStrategyBaseTest {
+class CalculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnityTest extends CalculationStrategyBaseTest {
 
     @InjectMocks
-    CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue calculationStrategy;
+    CalculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity calculationStrategy;
 
     @Test
     void getVehicleCalcResult() {
@@ -20,7 +21,7 @@ class CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValueTest extends
 
         checkVehicleCalcResult(result);
 
-        double expectedAnnualFee = TEST_CAR_PRODUCER_RISK_COEFF * (TEST_VEHICLE_AGE_RISK_COEFF * (LocalDate.now().getYear() - TEST_VEHICLE_REGISTRATION) + TEST_VEHICLE_VALUE_RISK_COEFF * TEST_VEHICLE_PURCHASE_PRICE);
+        double expectedAnnualFee = TEST_CAR_PRODUCER_RISK_COEFF * (TEST_VEHICLE_AGE_RISK_COEFF * (LocalDate.now().getYear() - TEST_VEHICLE_REGISTRATION) + TEST_VEHICLE_VALUE_RISK_COEFF * TEST_VEHICLE_PURCHASE_PRICE + TEST_VEHICLE_PREVIOUS_INDEMNITY * TEST_VEHICLE_PREVIOUS_INDEMNITY_RISK_COEFF);
 
         assertEquals(expectedAnnualFee, result.getAnnualFee());
         assertEquals(expectedAnnualFee / 12, result.getMonthlyFee());
@@ -34,5 +35,4 @@ class CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValueTest extends
 
         assertNull(result);
     }
-
 }

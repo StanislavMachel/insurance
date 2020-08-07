@@ -1,10 +1,9 @@
-package com.example.insurance.services;
+package com.example.insurance.services.calculation.strategy;
 
 import com.example.insurance.model.Vehicle;
 import com.example.insurance.model.VehicleCalcResult;
 import com.example.insurance.repositories.CoefficientRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
