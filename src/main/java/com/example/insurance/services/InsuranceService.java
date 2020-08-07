@@ -5,6 +5,7 @@ import com.example.insurance.model.VehicleCalcResult;
 import java.util.List;
 
 public interface InsuranceService {
-    List<VehicleCalcResult> getCalculationResultByCarProducerCoeffVehicleAgeAndVehicleValue();
-    List<VehicleCalcResult> getCalculationResultByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity();
+    List<VehicleCalcResult> getCalculationResults();
+
+    void setCalculationStrategy(CalculationStrategy calculationStrategy);
 }

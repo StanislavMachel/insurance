@@ -1,7 +1,9 @@
 package com.example.insurance;
 
+import com.example.insurance.repositories.CoefficientRepository;
 import com.example.insurance.repositories.CoefficientRepositoryImpl;
 import com.example.insurance.repositories.VehicleRepositoryImpl;
+import com.example.insurance.services.CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue;
 import com.example.insurance.services.InsuranceService;
 import com.example.insurance.services.InsuranceServiceImpl;
 import com.example.insurance.utils.CsvFileUtils;
@@ -14,9 +16,11 @@ public class InsuranceApp {
 
         System.out.println("InsuranceApp start...");
 
-        InsuranceService insuranceService = new InsuranceServiceImpl(new VehicleRepositoryImpl(), new CoefficientRepositoryImpl());
+        CoefficientRepository coefficientRepository = new CoefficientRepositoryImpl();
 
-        CsvFileUtils.writeFile(insuranceService.getCalculationResultByCarProducerCoeffVehicleAgeAndVehicleValue(), RESULT_3_COEFF_CSV);
+        InsuranceService insuranceService = new InsuranceServiceImpl(new VehicleRepositoryImpl(), new CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue(coefficientRepository));
+
+        CsvFileUtils.writeFile(insuranceService.getCalculationResults(), RESULT_3_COEFF_CSV);
 
         System.out.println("InsuranceApp ends.");
     }

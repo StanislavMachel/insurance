@@ -1,9 +1,8 @@
 package com.example.insurance.services;
 
 import com.example.insurance.model.Vehicle;
-import com.example.insurance.repositories.CoefficientRepository;
+import com.example.insurance.model.VehicleCalcResult;
 
 public interface CalculationStrategy {
-    double calculateAnnualFee(Vehicle vehicle);
-    void setCoefficientRepository(CoefficientRepository coefficientRepository);
+    VehicleCalcResult getVehicleCalcResult(Vehicle vehicle);
 }
