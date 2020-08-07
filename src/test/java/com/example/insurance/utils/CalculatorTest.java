@@ -8,16 +8,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CalculatorTest {
 
     @Test
-    public void calculateAnnualFee() {
-        double result = Calculator.calculateAnnualFee(0.99, 49687, 0.08, 5, 1.1);
+    public void calculateAnnualFee3Coeff() {
+        double result = Calculator.calculateAnnualFee(0.99,
+                new ParamValueCoefficient(49687, 0.08),
+                new ParamValueCoefficient(5, 1.1));
         //0.99 * (49687 * 0.08 + 1.1 * 5) = 0.99 * (3974.96 + 5.5) = 3940.6554
         assertEquals(3940.6554, result, 0.0001);
     }
 
     @Test
-    public void calculateMonthlyFee() {
-        double result = Calculator.calculateMonthlyFee(0.99, 49687, 0.08, 5, 1.1);
-        //(0.99 * (49687 * 0.08 + 1.1 * 5) = 0.99 * (3974.96 + 5.5))/12 = 3940.6554 / 12 = 328.38795
-        assertEquals(328.38795, result, 0.0001);
+    public void calculateAnnualFee4Coeff() {
+
+        double result = Calculator.calculateAnnualFee(0.99,
+                new ParamValueCoefficient(49687, 0.08),
+                new ParamValueCoefficient(5, 1.1),
+                new ParamValueCoefficient(10482.93, 0.05));
+
+        //0.99 * (49687 * 0.08 + 1.1 * 5 + 10482.93 * 0.05) = 0.99 * (3974.96 + 5.5 + 524.1465) = 4459.560435
+        assertEquals(4459.560435, result, 0.0001);
     }
 }

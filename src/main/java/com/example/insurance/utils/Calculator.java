@@ -1,19 +1,9 @@
 package com.example.insurance.utils;
 
-public class Calculator {
-    public static double calculateAnnualFee(double carProducerRiskCoeff,
-                                            double vehicleValue,
-                                            double vehicleValueRiskCoeff,
-                                            double vehicleAge,
-                                            double vehicleAgeRiskCoeff) {
-        return carProducerRiskCoeff * (vehicleValue * vehicleValueRiskCoeff + vehicleAge * vehicleAgeRiskCoeff);
-    }
+import java.util.Arrays;
 
-    public static double calculateMonthlyFee(double carProducerRiskCoeff,
-                                             double vehicleValue,
-                                             double vehicleValueRiskCoeff,
-                                             double vehicleAge,
-                                             double vehicleAgeRiskCoeff) {
-        return Calculator.calculateAnnualFee(carProducerRiskCoeff, vehicleValue, vehicleValueRiskCoeff, vehicleAge, vehicleAgeRiskCoeff) / 12;
+public class Calculator {
+    public static double calculateAnnualFee(double carProducerRiskCoeff, ParamValueCoefficient... paramValueCoefficients) {
+        return carProducerRiskCoeff * Arrays.stream(paramValueCoefficients).map(paramValueCoefficient -> paramValueCoefficient.getParamValue() * paramValueCoefficient.getCoefficient()).reduce(0d, Double::sum);
     }
 }

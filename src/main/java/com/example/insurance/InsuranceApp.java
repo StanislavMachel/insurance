@@ -16,7 +16,7 @@ public class InsuranceApp {
 
         InsuranceService insuranceService = new InsuranceServiceImpl(new VehicleRepositoryImpl(), new CoefficientRepositoryImpl());
 
-        CsvFileUtils.writeFile(insuranceService.getCalculationResult(), RESULT_3_COEFF_CSV);
+        CsvFileUtils.writeFile(insuranceService.getCalculationResultByCarProducerCoeffVehicleAgeAndVehicleValue(), RESULT_3_COEFF_CSV);
 
         System.out.println("InsuranceApp ends.");
     }

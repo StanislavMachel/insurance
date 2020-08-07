@@ -4,6 +4,7 @@ import com.example.insurance.model.VehicleCalcResult;
 import com.example.insurance.repositories.CoefficientRepository;
 import com.example.insurance.repositories.VehicleRepository;
 import com.example.insurance.utils.Calculator;
+import com.example.insurance.utils.ParamValueCoefficient;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class InsuranceServiceImpl implements InsuranceService {
     }
 
     @Override
-    public List<VehicleCalcResult> getCalculationResult() {
+    public List<VehicleCalcResult> getCalculationResultByCarProducerCoeffVehicleAgeAndVehicleValue() {
         ArrayList<VehicleCalcResult> results = new ArrayList<>();
 
         vehicleRepository.findAll().forEach(vehicle -> {
@@ -34,16 +35,35 @@ public class InsuranceServiceImpl implements InsuranceService {
                         vehicle.getPreviousIndemnity(),
                         Calculator.calculateAnnualFee(
                                 coefficientRepository.getRiskByCarProducer(vehicle.getProducer()),
-                                vehicle.getPurchasePrice(),
-                                coefficientRepository.getRiskByParameter(CoefficientRepository.VEHICLE_VALUE_RISK_COEFF),
-                                (LocalDate.now().getYear() - vehicle.getFirstRegistration()),
-                                coefficientRepository.getRiskByParameter(CoefficientRepository.VEHICLE_AGE_RISK_COEFF)),
-                        Calculator.calculateMonthlyFee(
+                                new ParamValueCoefficient(vehicle.getPurchasePrice(), coefficientRepository.getRiskByParameter(CoefficientRepository.VEHICLE_VALUE_RISK_COEFF)),
+                                new ParamValueCoefficient((LocalDate.now().getYear() - vehicle.getFirstRegistration()), coefficientRepository.getRiskByParameter(CoefficientRepository.VEHICLE_AGE_RISK_COEFF))
+                        ));
+                results.add(result);
+            }
+        });
+
+        return results;
+    }
+
+    @Override
+    public List<VehicleCalcResult> getCalculationResultByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity() {
+        ArrayList<VehicleCalcResult> results = new ArrayList<>();
+
+        vehicleRepository.findAll().forEach(vehicle -> {
+            if (coefficientRepository.getAvgPurchasePriceByCarProducer(vehicle.getProducer()) != null) {
+                VehicleCalcResult result = new VehicleCalcResult(
+                        vehicle.getPlateNumber(),
+                        vehicle.getFirstRegistration(),
+                        vehicle.getPurchasePrice(),
+                        vehicle.getProducer(),
+                        vehicle.getMileage(),
+                        vehicle.getPreviousIndemnity(),
+                        Calculator.calculateAnnualFee(
                                 coefficientRepository.getRiskByCarProducer(vehicle.getProducer()),
-                                vehicle.getPurchasePrice(),
-                                coefficientRepository.getRiskByParameter(CoefficientRepository.VEHICLE_VALUE_RISK_COEFF),
-                                (LocalDate.now().getYear() - vehicle.getFirstRegistration()),
-                                coefficientRepository.getRiskByParameter(CoefficientRepository.VEHICLE_AGE_RISK_COEFF)));
+                                new ParamValueCoefficient(vehicle.getPurchasePrice(), coefficientRepository.getRiskByParameter(CoefficientRepository.VEHICLE_VALUE_RISK_COEFF)),
+                                new ParamValueCoefficient((LocalDate.now().getYear() - vehicle.getFirstRegistration()), coefficientRepository.getRiskByParameter(CoefficientRepository.VEHICLE_AGE_RISK_COEFF)),
+                                new ParamValueCoefficient(vehicle.getPreviousIndemnity(), coefficientRepository.getRiskByParameter(CoefficientRepository.VEHICLE_PREVIOUS_INDEMNITY_RISK_COEFF))
+                        ));
                 results.add(result);
             }
         });
