@@ -1,6 +1,8 @@
 package com.example.insurance;
 
 import com.example.insurance.migration.DbMigration;
+import com.example.insurance.model.InsuranceCalcResult;
+import com.example.insurance.repositories.csv.VehicleCsvRepository;
 import com.example.insurance.services.InsuranceService;
 import com.example.insurance.services.calculation.strategy.CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue;
 import com.example.insurance.services.calculation.strategy.CalculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity;
@@ -11,6 +13,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.util.List;
 
 @SpringBootApplication
 public class InsuranceApp {
@@ -27,6 +31,7 @@ public class InsuranceApp {
 
     @Bean
     public CommandLineRunner run(InsuranceService insuranceService,
+                                 VehicleCsvRepository vehicleCsvRepository,
                                  CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue calculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue,
                                  CalculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity calculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity,
                                  DbMigration dbMigration) {
@@ -35,11 +40,13 @@ public class InsuranceApp {
 
             insuranceService.setCalculationStrategy(calculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue);
 
-            CsvFileUtils.writeFile(insuranceService.getCalculationResults(), RESULT_3_COEFF_CSV);
+            List<InsuranceCalcResult> results1 = insuranceService.getCalculationResults(vehicleCsvRepository.findAll());
+            CsvFileUtils.writeFile(results1, RESULT_3_COEFF_CSV);
 
             insuranceService.setCalculationStrategy(calculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity);
 
-            CsvFileUtils.writeFile(insuranceService.getCalculationResults(), RESULT_4_COEFF_CSV);
+            List<InsuranceCalcResult> results2 = insuranceService.getCalculationResults(vehicleCsvRepository.findAll());
+            CsvFileUtils.writeFile(results2, RESULT_4_COEFF_CSV);
 
             dbMigration.run();
 

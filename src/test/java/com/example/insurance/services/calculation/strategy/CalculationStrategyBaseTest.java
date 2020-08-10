@@ -1,7 +1,7 @@
 package com.example.insurance.services.calculation.strategy;
 
 import com.example.insurance.model.Vehicle;
-import com.example.insurance.csv.VehicleCalcResult;
+import com.example.insurance.model.InsuranceCalcResult;
 import com.example.insurance.repositories.json.CoefficientRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
@@ -39,14 +39,15 @@ public class CalculationStrategyBaseTest {
         Mockito.when(coefficientRepository.getRiskByParameter(CoefficientRepository.VEHICLE_PREVIOUS_INDEMNITY_RISK_COEFF)).thenReturn(TEST_VEHICLE_PREVIOUS_INDEMNITY_RISK_COEFF);
     }
 
-    protected void checkVehicleCalcResult(VehicleCalcResult result) {
+    protected void checkVehicleCalcResult(InsuranceCalcResult result) {
         assertNotNull(result);
-        assertEquals(TEST_VEHICLE_PLATE_NUMBER, result.getPlateNumber());
-        assertEquals(TEST_VEHICLE_REGISTRATION, result.getFirstRegistration());
-        assertEquals(TEST_VEHICLE_PURCHASE_PRICE, result.getPurchasePrice());
-        assertEquals(TEST_VEHICLE_PRODUCER, result.getProducer());
-        assertEquals(TEST_VEHICLE_MILEAGE, result.getMileage());
-        assertEquals(TEST_VEHICLE_PREVIOUS_INDEMNITY, result.getPreviousIndemnity());
+        assertNotNull(result.getVehicle());
+        assertEquals(TEST_VEHICLE_PLATE_NUMBER, result.getVehicle().getPlateNumber());
+        assertEquals(TEST_VEHICLE_REGISTRATION, result.getVehicle().getFirstRegistration());
+        assertEquals(TEST_VEHICLE_PURCHASE_PRICE, result.getVehicle().getPurchasePrice());
+        assertEquals(TEST_VEHICLE_PRODUCER, result.getVehicle().getProducer());
+        assertEquals(TEST_VEHICLE_MILEAGE, result.getVehicle().getMileage());
+        assertEquals(TEST_VEHICLE_PREVIOUS_INDEMNITY, result.getVehicle().getPreviousIndemnity());
     }
 
 

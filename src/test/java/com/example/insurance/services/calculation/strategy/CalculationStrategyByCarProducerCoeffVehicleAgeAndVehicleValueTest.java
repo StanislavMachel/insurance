@@ -1,6 +1,6 @@
 package com.example.insurance.services.calculation.strategy;
 
-import com.example.insurance.csv.VehicleCalcResult;
+import com.example.insurance.model.InsuranceCalcResult;
 import com.example.insurance.model.Vehicle;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -17,7 +17,7 @@ class CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValueTest extends
 
     @Test
     void getVehicleCalcResult() {
-        VehicleCalcResult result = calculationStrategy.getVehicleCalcResult(TEST_VEHICLE);
+        InsuranceCalcResult result = calculationStrategy.getVehicleCalcResult(TEST_VEHICLE);
 
         checkVehicleCalcResult(result);
 
@@ -31,7 +31,7 @@ class CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValueTest extends
     public void getVehicleCalcResultRerunsNullIfRiskByCarProducerNotExists() {
         Vehicle vehicle = new Vehicle(TEST_VEHICLE_ID, TEST_VEHICLE_PLATE_NUMBER, TEST_VEHICLE_REGISTRATION, TEST_VEHICLE_PURCHASE_PRICE, "UNKNOWN", TEST_VEHICLE_MILEAGE, TEST_VEHICLE_PREVIOUS_INDEMNITY);
 
-        VehicleCalcResult result = calculationStrategy.getVehicleCalcResult(vehicle);
+        InsuranceCalcResult result = calculationStrategy.getVehicleCalcResult(vehicle);
 
         assertNull(result);
     }
