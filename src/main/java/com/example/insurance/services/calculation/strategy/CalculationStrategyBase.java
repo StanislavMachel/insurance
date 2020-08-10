@@ -1,6 +1,6 @@
 package com.example.insurance.services.calculation.strategy;
 
-import com.example.insurance.csv.VehicleCalcResult;
+import com.example.insurance.model.InsuranceCalcResult;
 import com.example.insurance.model.Vehicle;
 import com.example.insurance.repositories.json.CoefficientRepository;
 import com.example.insurance.utils.ParamValueCoefficient;
@@ -33,17 +33,9 @@ public abstract class CalculationStrategyBase implements CalculationStrategy {
         return new ParamValueCoefficient(vehicle.getPreviousIndemnity(), coefficientRepository.getRiskByParameter(CoefficientRepository.VEHICLE_PREVIOUS_INDEMNITY_RISK_COEFF));
     }
 
-    public VehicleCalcResult getVehicleCalcResult(Vehicle vehicle) {
+    public InsuranceCalcResult getVehicleCalcResult(Vehicle vehicle) {
         if (coefficientRepository.getAvgPurchasePriceByCarProducer(vehicle.getProducer()) == null) return null;
 
-        return new VehicleCalcResult(
-                vehicle.getId(),
-                vehicle.getPlateNumber(),
-                vehicle.getFirstRegistration(),
-                vehicle.getPurchasePrice(),
-                vehicle.getProducer(),
-                vehicle.getMileage(),
-                vehicle.getPreviousIndemnity(),
-                calculateAnnualFee(vehicle));
+        return new InsuranceCalcResult(vehicle, calculateAnnualFee(vehicle));
     }
 }

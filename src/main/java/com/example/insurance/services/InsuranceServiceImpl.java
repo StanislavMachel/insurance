@@ -1,7 +1,7 @@
 package com.example.insurance.services;
 
-import com.example.insurance.csv.VehicleCalcResult;
-import com.example.insurance.repositories.csv.VehicleCsvRepository;
+import com.example.insurance.model.InsuranceCalcResult;
+import com.example.insurance.model.Vehicle;
 import com.example.insurance.services.calculation.strategy.CalculationStrategy;
 import org.springframework.stereotype.Service;
 
@@ -11,20 +11,18 @@ import java.util.List;
 @Service
 public class InsuranceServiceImpl implements InsuranceService {
 
-    private final VehicleCsvRepository vehicleCsvRepository;
     private CalculationStrategy calculationStrategy;
 
-    public InsuranceServiceImpl(VehicleCsvRepository vehicleCsvRepository) {
-        this.vehicleCsvRepository = vehicleCsvRepository;
+    public InsuranceServiceImpl() {
     }
 
     @Override
-    public List<VehicleCalcResult> getCalculationResults() {
-        ArrayList<VehicleCalcResult> results = new ArrayList<>();
+    public List<InsuranceCalcResult> getCalculationResults(List<Vehicle> vehicles) {
+        ArrayList<InsuranceCalcResult> results = new ArrayList<>();
 
-        vehicleCsvRepository.findAll().forEach(vehicle -> {
+        vehicles.forEach(vehicle -> {
 
-            VehicleCalcResult result = calculationStrategy.getVehicleCalcResult(vehicle);
+            InsuranceCalcResult result = calculationStrategy.getVehicleCalcResult(vehicle);
 
             if (result != null) {
                 results.add(result);
