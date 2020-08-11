@@ -1,4 +1,4 @@
-package com.example.insurance.services.calculation.strategy;
+package com.example.insurance.services.csv.strategy;
 
 import com.example.insurance.model.Vehicle;
 import com.example.insurance.repositories.json.CoefficientRepository;
@@ -6,9 +6,9 @@ import com.example.insurance.utils.Calculator;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue extends CalculationStrategyBase implements CalculationStrategy {
+public class CsvCalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue extends CsvCalculationStrategyBase implements CsvCalculationStrategy {
 
-    public CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue(CoefficientRepository coefficientRepository) {
+    public CsvCalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue(CoefficientRepository coefficientRepository) {
         super(coefficientRepository);
     }
 

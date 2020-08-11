@@ -2,10 +2,9 @@ package com.example.insurance;
 
 import com.example.insurance.migration.DbMigration;
 import com.example.insurance.model.InsuranceCalcResult;
-import com.example.insurance.repositories.csv.VehicleCsvRepository;
-import com.example.insurance.services.InsuranceService;
-import com.example.insurance.services.calculation.strategy.CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue;
-import com.example.insurance.services.calculation.strategy.CalculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity;
+import com.example.insurance.services.csv.InsuranceCsvService;
+import com.example.insurance.services.csv.strategy.CsvCalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue;
+import com.example.insurance.services.csv.strategy.CsvCalculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity;
 import com.example.insurance.utils.CsvFileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,25 +29,24 @@ public class InsuranceApp {
     }
 
     @Bean
-    public CommandLineRunner run(InsuranceService insuranceService,
-                                 VehicleCsvRepository vehicleCsvRepository,
-                                 CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue calculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue,
-                                 CalculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity calculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity,
+    public CommandLineRunner run(InsuranceCsvService insuranceCsvService,
+                                 CsvCalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue calculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue,
+                                 CsvCalculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity calculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity,
                                  DbMigration dbMigration) {
         return args -> {
             LOG.info("InsuranceApp start...");
 
-            insuranceService.setCalculationStrategy(calculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue);
+            insuranceCsvService.setCalculationStrategy(calculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue);
 
-            List<InsuranceCalcResult> results1 = insuranceService.getCalculationResults(vehicleCsvRepository.findAll());
+            List<InsuranceCalcResult> results1 = insuranceCsvService.getCalculationResults();
             CsvFileUtils.writeFile(results1, RESULT_3_COEFF_CSV);
 
-            insuranceService.setCalculationStrategy(calculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity);
+            insuranceCsvService.setCalculationStrategy(calculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousIndemnity);
 
-            List<InsuranceCalcResult> results2 = insuranceService.getCalculationResults(vehicleCsvRepository.findAll());
+            List<InsuranceCalcResult> results2 = insuranceCsvService.getCalculationResults();
             CsvFileUtils.writeFile(results2, RESULT_4_COEFF_CSV);
 
-            dbMigration.run();
+            //dbMigration.run();
 
             LOG.info("InsuranceApp ends.");
 

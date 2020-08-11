@@ -1,4 +1,4 @@
-package com.example.insurance.services.calculation.strategy;
+package com.example.insurance.services.csv.strategy;
 
 import com.example.insurance.model.InsuranceCalcResult;
 import com.example.insurance.model.Vehicle;
@@ -10,10 +10,10 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValueTest extends CalculationStrategyBaseTest {
+class CsvCalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValueTest extends CsvCalculationStrategyBaseTest {
 
     @InjectMocks
-    CalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue calculationStrategy;
+    CsvCalculationStrategyByCarProducerCoeffVehicleAgeAndVehicleValue calculationStrategy;
 
     @Test
     void getVehicleCalcResult() {

@@ -1,8 +1,8 @@
-package com.example.insurance.services.calculation.strategy;
+package com.example.insurance.services.csv.strategy;
 
 import com.example.insurance.model.InsuranceCalcResult;
 import com.example.insurance.model.Vehicle;
 
-public interface CalculationStrategy {
+public interface CsvCalculationStrategy {
     InsuranceCalcResult getVehicleCalcResult(Vehicle vehicle);
 }

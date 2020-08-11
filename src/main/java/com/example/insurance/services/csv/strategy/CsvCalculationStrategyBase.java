@@ -1,4 +1,4 @@
-package com.example.insurance.services.calculation.strategy;
+package com.example.insurance.services.csv.strategy;
 
 import com.example.insurance.model.InsuranceCalcResult;
 import com.example.insurance.model.Vehicle;
@@ -7,11 +7,11 @@ import com.example.insurance.utils.ParamValueCoefficient;
 
 import java.time.LocalDate;
 
-public abstract class CalculationStrategyBase implements CalculationStrategy {
+public abstract class CsvCalculationStrategyBase implements CsvCalculationStrategy {
 
     protected final CoefficientRepository coefficientRepository;
 
-    protected CalculationStrategyBase(CoefficientRepository coefficientRepository) {
+    protected CsvCalculationStrategyBase(CoefficientRepository coefficientRepository) {
         this.coefficientRepository = coefficientRepository;
     }
 

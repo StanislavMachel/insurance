@@ -3,6 +3,8 @@ package com.example.insurance.repositories.json;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CoefficientRepositoryImplTest {
@@ -51,5 +53,26 @@ public class CoefficientRepositoryImplTest {
     @Test
     public void getAvgPurchasePriceByCarProducerUnknown() {
         assertNull(coefficientRepository.getAvgPurchasePriceByCarProducer("UNKNOWN"));
+    }
+
+    @Test
+    void getCarProducerRisks() {
+        Map<String, Double> risks = coefficientRepository.getCarProducerRisks();
+        assertNotNull(risks);
+        assertEquals(6, risks.size());
+    }
+
+    @Test
+    void getParameterRisks() {
+        Map<String, Double> risks = coefficientRepository.getParameterRisks();
+        assertNotNull(risks);
+        assertEquals(3, risks.size());
+    }
+
+    @Test
+    void getAvgPurchasePrices() {
+        Map<String, Double> risks = coefficientRepository.getAvgPurchasePrices();
+        assertNotNull(risks);
+        assertEquals(11, risks.size());
     }
 }

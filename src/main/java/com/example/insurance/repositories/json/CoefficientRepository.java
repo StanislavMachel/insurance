@@ -1,5 +1,7 @@
 package com.example.insurance.repositories.json;
 
+import java.util.Map;
+
 public interface CoefficientRepository {
 
     String VEHICLE_VALUE_RISK_COEFF = "vehicle_value";
@@ -11,4 +13,10 @@ public interface CoefficientRepository {
     double getRiskByParameter(String parameter);
 
     Double getAvgPurchasePriceByCarProducer(String carProducer);
+
+    Map<String, Double> getCarProducerRisks();
+
+    Map<String, Double> getParameterRisks();
+
+    Map<String, Double> getAvgPurchasePrices();
 }

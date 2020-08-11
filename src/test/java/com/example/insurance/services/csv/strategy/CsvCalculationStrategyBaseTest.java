@@ -1,4 +1,4 @@
-package com.example.insurance.services.calculation.strategy;
+package com.example.insurance.services.csv.strategy;
 
 import com.example.insurance.model.Vehicle;
 import com.example.insurance.model.InsuranceCalcResult;
@@ -11,7 +11,7 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class CalculationStrategyBaseTest {
+public class CsvCalculationStrategyBaseTest {
     protected static final long TEST_VEHICLE_ID = 1;
     protected static final String TEST_VEHICLE_PLATE_NUMBER = "AAA000";
     protected static final int TEST_VEHICLE_REGISTRATION = 2019;
