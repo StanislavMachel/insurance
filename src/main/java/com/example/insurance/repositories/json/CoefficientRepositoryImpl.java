@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -26,26 +29,38 @@ public class CoefficientRepositoryImpl implements CoefficientRepository {
 
     @Override
     public double getRiskByCarProducer(String carProducer) {
-        return Optional.ofNullable(data)
-                .map(Data::getMakeCoefficients)
-                .map(makeCoefficients -> makeCoefficients.get(carProducer))
-                .orElse(DEFAULT_CAR_PRODUCER_RISK);
+        return getCarProducerRisks().getOrDefault(carProducer, DEFAULT_CAR_PRODUCER_RISK);
     }
 
     @Override
     public double getRiskByParameter(String parameter) {
-        return Optional.ofNullable(data)
-                .map(Data::getCoefficients)
-                .map(makeCoefficients -> makeCoefficients.get(parameter))
-                .orElse(DEFAULT_CAR_PRODUCER_RISK);
+        return getParameterRisks().getOrDefault(parameter, DEFAULT_CAR_PRODUCER_RISK);
     }
 
     @Override
     public Double getAvgPurchasePriceByCarProducer(String carProducer) {
-        return Optional.ofNullable(data)
+        return getAvgPurchasePrices().get(carProducer);
+    }
+
+    @Override
+    public Map<String, Double> getCarProducerRisks() {
+        return Collections.unmodifiableMap(Optional.ofNullable(data)
+                .map(Data::getMakeCoefficients)
+                .orElse(new LinkedHashMap<>()));
+    }
+
+    @Override
+    public Map<String, Double> getParameterRisks() {
+        return Collections.unmodifiableMap(Optional.ofNullable(data)
+                .map(Data::getCoefficients)
+                .orElse(new LinkedHashMap<>()));
+    }
+
+    @Override
+    public Map<String, Double> getAvgPurchasePrices() {
+        return Collections.unmodifiableMap(Optional.ofNullable(data)
                 .map(Data::getAvgPurchasePrice)
-                .map(avgPurchasePrices -> avgPurchasePrices.get(carProducer))
-                .orElse(null);
+                .orElse(new LinkedHashMap<>()));
     }
 
     private Data getData() {
