@@ -2,10 +2,6 @@ package com.example.insurance.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 @Entity
 public class Vehicle {
@@ -18,9 +14,6 @@ public class Vehicle {
     private String producer;
     private double mileage;
     private double previousIndemnity;
-
-    @OneToMany
-    private List<InsuranceCalcResult> insuranceCalcResults = new ArrayList<>();
 
     protected Vehicle() {
     }
@@ -66,9 +59,5 @@ public class Vehicle {
 
     public double getPreviousIndemnity() {
         return previousIndemnity;
-    }
-
-    public List<InsuranceCalcResult> getInsuranceCalcResults() {
-        return Collections.unmodifiableList(insuranceCalcResults);
     }
 }
