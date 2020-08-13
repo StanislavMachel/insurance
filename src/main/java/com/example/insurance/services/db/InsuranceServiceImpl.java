@@ -76,9 +76,6 @@ public class InsuranceServiceImpl implements InsuranceService {
                 }).collect(Collectors.toList());
 
         insuranceCalcResultRepository.saveAll(results);
-
-        LOG.info("Count: {}", insuranceCalcResultRepository.count());
-
     }
 
     private ParamValueCoefficient getValueParamValueCoefficient(Vehicle vehicle, ParameterRisk parameterRisk) {

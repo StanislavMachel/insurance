@@ -13,7 +13,7 @@ public class CalculatorTest {
                 new ParamValueCoefficient(49687, 0.08),
                 new ParamValueCoefficient(5, 1.1));
         //0.99 * (49687 * 0.08 + 1.1 * 5) = 0.99 * (3974.96 + 5.5) = 3940.6554
-        assertEquals(3940.6554, result, 0.0001);
+        assertEquals(3940.6554, result, 0.01);
     }
 
     @Test
@@ -25,6 +25,6 @@ public class CalculatorTest {
                 new ParamValueCoefficient(10482.93, 0.05));
 
         //0.99 * (49687 * 0.08 + 1.1 * 5 + 10482.93 * 0.05) = 0.99 * (3974.96 + 5.5 + 524.1465) = 4459.560435
-        assertEquals(4459.560435, result, 0.0001);
+        assertEquals(4459.560435, result, 0.01);
     }
 }

@@ -2,12 +2,12 @@ package com.example.insurance.controllers;
 
 import com.example.insurance.model.InsuranceCalcResult;
 import com.example.insurance.repositories.jpa.InsuranceCalcResultRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RequestMapping(InsuranceCalcResultController.URL)
 @RestController
@@ -20,7 +20,7 @@ public class InsuranceCalcResultController {
     }
 
     @GetMapping
-    public ResponseEntity<List<InsuranceCalcResult>> getAll() {
-        return ResponseEntity.ok(insuranceCalcResultRepository.findAll());
+    public ResponseEntity<Page<InsuranceCalcResult>> getAll(Pageable pageable) {
+        return ResponseEntity.ok(insuranceCalcResultRepository.findAll(pageable));
     }
 }

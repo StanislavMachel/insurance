@@ -1,13 +1,16 @@
 package com.example.insurance.model;
 
+import org.apache.commons.math3.util.Precision;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class InsuranceCalcResult {
 
-    @GeneratedValue
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -33,7 +36,7 @@ public class InsuranceCalcResult {
     }
 
     public double getMonthlyFee() {
-        return this.annualFee / 12;
+        return Precision.round(this.annualFee / 12, 2);
     }
 
     public double getAnnualFee() {

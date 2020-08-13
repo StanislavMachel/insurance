@@ -98,7 +98,6 @@ public class DbMigration implements CommandLineRunner {
         insuranceService.getCalculationResults();
 
         LOG.info("Migrated {} calc results", insuranceCalcResultRepository.count());
-        insuranceService.getCalculationResults();
 
 
         LOG.info("Migration to memory database sucessfully done");

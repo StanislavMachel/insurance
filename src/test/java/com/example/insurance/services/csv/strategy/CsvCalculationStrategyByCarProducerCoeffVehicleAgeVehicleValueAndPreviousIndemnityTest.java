@@ -24,7 +24,7 @@ class CsvCalculationStrategyByCarProducerCoeffVehicleAgeVehicleValueAndPreviousI
         double expectedAnnualFee = TEST_CAR_PRODUCER_RISK_COEFF * (TEST_VEHICLE_AGE_RISK_COEFF * (LocalDate.now().getYear() - TEST_VEHICLE_REGISTRATION) + TEST_VEHICLE_VALUE_RISK_COEFF * TEST_VEHICLE_PURCHASE_PRICE + TEST_VEHICLE_PREVIOUS_INDEMNITY * TEST_VEHICLE_PREVIOUS_INDEMNITY_RISK_COEFF);
 
         assertEquals(expectedAnnualFee, result.getAnnualFee());
-        assertEquals(expectedAnnualFee / 12, result.getMonthlyFee());
+        assertEquals(expectedAnnualFee / 12, result.getMonthlyFee(), 0.01);
     }
 
     @Test
